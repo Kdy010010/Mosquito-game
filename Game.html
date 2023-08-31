@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #87CEEB;
+  }
+
+  .mosquito {
+    width: 40px;
+    height: 40px;
+    background-color: #808080;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const body = document.body;
+  const maxMosquitoes = 10;
+  const mosquitoes = [];
+
+  function createMosquito() {
+    const mosquito = document.createElement("div");
+    mosquito.className = "mosquito";
+    mosquito.style.left = Math.random() * (window.innerWidth - 40) + "px";
+    mosquito.style.top = Math.random() * (window.innerHeight - 40) + "px";
+    mosquito.addEventListener("click", function() {
+      this.remove();
+    });
+    body.appendChild(mosquito);
+    mosquitoes.push(mosquito);
+  }
+
+  function moveMosquitoes() {
+    for (let i = 0; i < mosquitoes.length; i++) {
+      const mosquito = mosquitoes[i];
+      const newX = Math.random() * (window.innerWidth - 40);
+      const newY = Math.random() * (window.innerHeight - 40);
+      mosquito.style.left = newX + "px";
+      mosquito.style.top = newY + "px";
+    }
+  }
+
+  setInterval(function() {
+    if (mosquitoes.length < maxMosquitoes) {
+      createMosquito();
+    }
+  }, 1000);
+
+  setInterval(moveMosquitoes, 1000);
+});
+</script>
+
+</body>
+</html>
